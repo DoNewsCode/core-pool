@@ -1,3 +1,20 @@
+
+<div align="center">
+  <h1>core-pool</h1>
+  <p>
+    <strong>A async worker pool for package <a href="github.com/DoNewsCode/core">Core</a>
+  </p>
+  <p>
+
+[![Build](https://github.com/DoNewsCode/core-pool/actions/workflows/go.yml/badge.svg)](https://github.com/DoNewsCode/core-pool/actions/workflows/go.yml)
+[![Go Reference](https://pkg.go.dev/badge/github.com/DoNewsCode/core-pool.svg)](https://pkg.go.dev/github.com/DoNewsCode/core-pool)
+[![codecov](https://codecov.io/gh/DoNewsCode/core-pool/branch/master/graph/badge.svg)](https://codecov.io/gh/DoNewsCode/core-pool)
+[![Go Report Card](https://goreportcard.com/badge/DoNewsCode/core-pool)](https://goreportcard.com/report/DoNewsCode/core-pool)
+[![Sourcegraph](https://sourcegraph.com/github.com/DoNewsCode/core-pool/-/badge.svg)](https://sourcegraph.com/github.com/DoNewsCode/core-pool?badge)
+
+ </p>
+</div>
+
 The package pool is a generic solution for async job dispatching from web server. While Go natively
 supports async jobs by using the keyword "go", but this may lead to several unwanted consequences.
 Suppose we have a typical http handler:
