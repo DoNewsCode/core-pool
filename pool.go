@@ -97,8 +97,8 @@ func (p *Pool) ProvideRunGroup(group *run.Group) {
 		}))
 	}
 
+	wg.Add(1)
 	group.Add(func() error {
-		wg.Add(1)
 		wg.Wait()
 		cancel()
 		return nil
