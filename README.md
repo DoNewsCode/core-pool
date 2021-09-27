@@ -2,7 +2,7 @@
 <div align="center">
   <h1>core-pool</h1>
   <p>
-    <strong>A async worker pool for package <a href="github.com/DoNewsCode/core">Core</a>
+    <strong>A async worker pool for package <a href="github.com/DoNewsCode/core">Core</a></strong>
   </p>
   <p>
 
