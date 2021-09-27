@@ -61,10 +61,10 @@ type job struct {
 func newPool(options ...ProviderOptionFunc) func(contract.Dispatcher) *Pool {
 	return func(dispatcher contract.Dispatcher) *Pool {
 		pool := Pool{
-			ch:            make(chan job),
-			concurrency:   10,
-			timeout:       10 * time.Second,
-			dispatcher:    dispatcher,
+			ch:             make(chan job),
+			concurrency:    10,
+			timeout:        10 * time.Second,
+			dispatcher:     dispatcher,
 			shutdownEvents: []interface{}{core.OnHTTPServerShutdown, core.OnGRPCServerShutdown},
 		}
 		for _, f := range options {
@@ -96,16 +96,18 @@ func (p *Pool) ProvideRunGroup(group *run.Group) {
 			return nil
 		}))
 	}
+
 	group.Add(func() error {
+		wg.Add(1)
 		wg.Wait()
 		cancel()
 		return nil
-	}, func(err error) {})
-	group.Add(func() error {
-		wg.Add(1)
-		return p.Run(ctx)
 	}, func(err error) {
 		wg.Done()
+	})
+	group.Add(func() error {
+		return p.Run(ctx)
+	}, func(err error) {
 	})
 }
 
