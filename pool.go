@@ -1,4 +1,4 @@
-// The package pool is a generic solution for async job dispatching from web
+// Package pool is a generic solution for async job dispatching from web
 // server. While Go natively supports async jobs by using the keyword "go", but
 // this may lead to several unwanted consequences. Suppose we have a typical http handler:
 //
@@ -58,7 +58,8 @@ type job struct {
 	function func(ctx context.Context)
 }
 
-func newPool(options ...ProviderOptionFunc) func(contract.Dispatcher) *Pool {
+// NewPool returned func(contract.Dispatcher) *Pool
+func NewPool(options ...ProviderOptionFunc) func(contract.Dispatcher) *Pool {
 	return func(dispatcher contract.Dispatcher) *Pool {
 		pool := Pool{
 			ch:             make(chan job),
