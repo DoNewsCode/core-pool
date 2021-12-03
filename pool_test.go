@@ -13,7 +13,7 @@ func TestPool_Go(t *testing.T) {
 	t.Parallel()
 	ctx, cancel := context.WithCancel(context.Background())
 	dispatcher := events.SyncDispatcher{}
-	p := newPool(WithConcurrency(1), WithShutdownEvents())(&dispatcher)
+	p := NewPool(WithConcurrency(1), WithShutdownEvents())(&dispatcher)
 	go p.Go(context.Background(), func(asyncContext context.Context) {
 		cancel()
 	})
@@ -26,7 +26,7 @@ func TestPool_Timeout(t *testing.T) {
 	defer cancel()
 
 	dispatcher := events.SyncDispatcher{}
-	p := newPool(WithTimeout(time.Second), WithConcurrency(1), WithShutdownEvents())(&dispatcher)
+	p := NewPool(WithTimeout(time.Second), WithConcurrency(1), WithShutdownEvents())(&dispatcher)
 	go p.Go(context.Background(), func(asyncContext context.Context) {
 		select {
 		case <-asyncContext.Done():
@@ -47,7 +47,7 @@ func TestPool_contextValue(t *testing.T) {
 	defer cancel()
 
 	dispatcher := events.SyncDispatcher{}
-	p := newPool(WithConcurrency(1), WithShutdownEvents())(&dispatcher)
+	p := NewPool(WithConcurrency(1), WithShutdownEvents())(&dispatcher)
 	key := struct{}{}
 	requestContext := context.WithValue(context.Background(), key, "foo")
 	go p.Go(requestContext, func(asyncContext context.Context) {
@@ -66,7 +66,7 @@ func TestPool_ProvideRunGroup(t *testing.T) {
 	t.Parallel()
 	t.Run("run group should exit if no shutdown event is specified", func(t *testing.T) {
 		dispatcher := events.SyncDispatcher{}
-		p := newPool(WithConcurrency(1), WithShutdownEvents())(&dispatcher)
+		p := NewPool(WithConcurrency(1), WithShutdownEvents())(&dispatcher)
 		var group run.Group
 		group.Add(func() error { return nil }, func(err error) {})
 		p.ProvideRunGroup(&group)
@@ -77,7 +77,7 @@ func TestPool_ProvideRunGroup(t *testing.T) {
 		dispatcher := events.SyncDispatcher{}
 		var fooEvent = "fooEvent"
 		var barEvent = "barEvent"
-		p := newPool(WithConcurrency(1), WithShutdownEvents(fooEvent, barEvent))(&dispatcher)
+		p := NewPool(WithConcurrency(1), WithShutdownEvents(fooEvent, barEvent))(&dispatcher)
 		var group run.Group
 		group.Add(func() error { return nil }, func(err error) {})
 		p.ProvideRunGroup(&group)

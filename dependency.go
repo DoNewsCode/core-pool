@@ -8,7 +8,7 @@ import (
 
 // Providers provide a *pool.Pool to the core.
 func Providers(options ...ProviderOptionFunc) di.Deps {
-	return di.Deps{newPool(options...)}
+	return di.Deps{NewPool(options...)}
 }
 
 // ProviderOptionFunc is the functional option to Providers.
