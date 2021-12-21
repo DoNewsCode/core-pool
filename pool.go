@@ -47,7 +47,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/DoNewsCode/core"
 	"github.com/DoNewsCode/core/contract"
 	"github.com/DoNewsCode/core/events"
 	"github.com/oklog/run"
