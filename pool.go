@@ -47,7 +47,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/DoNewsCode/core"
 	"github.com/DoNewsCode/core/contract"
 	"github.com/DoNewsCode/core/events"
 	"github.com/oklog/run"
@@ -66,7 +65,7 @@ func NewPool(options ...ProviderOptionFunc) func(contract.Dispatcher) *Pool {
 			concurrency:    10,
 			timeout:        10 * time.Second,
 			dispatcher:     dispatcher,
-			shutdownEvents: []interface{}{core.OnHTTPServerShutdown, core.OnGRPCServerShutdown},
+			shutdownEvents: []interface{}{},
 		}
 		for _, f := range options {
 			f(&pool)
