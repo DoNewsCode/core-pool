@@ -66,7 +66,7 @@ func NewPool(options ...ProviderOptionFunc) func(contract.Dispatcher) *Pool {
 			concurrency:    10,
 			timeout:        10 * time.Second,
 			dispatcher:     dispatcher,
-			shutdownEvents: []interface{}{core.OnHTTPServerShutdown, core.OnGRPCServerShutdown},
+			shutdownEvents: []interface{}{},
 		}
 		for _, f := range options {
 			f(&pool)
