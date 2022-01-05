@@ -41,6 +41,29 @@ func TestPool_Timeout(t *testing.T) {
 	p.Run(ctx)
 }
 
+func TestPool_FallbackToSyncMode(t *testing.T) {
+	t.Parallel()
+	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)
+	defer cancel()
+
+	dispatcher := events.SyncDispatcher{}
+	p := newPool(WithTimeout(time.Second), WithConcurrency(1), WithShutdownEvents())(&dispatcher)
+	p.Run(ctx)
+
+	var executed = make(chan struct{})
+	go func() {
+		// saturate the pool
+		p.Go(ctx, func(asyncContext context.Context) {
+			time.Sleep(time.Second)
+		})
+		// fallback to sync mode
+		p.Go(ctx, func(asyncContext context.Context) {
+			close(executed)
+		})
+	}()
+	<-executed
+}
+
 func TestPool_contextValue(t *testing.T) {
 	t.Parallel()
 	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond)

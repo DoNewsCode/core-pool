@@ -120,9 +120,18 @@ func (p *Pool) Module() interface{} {
 // from http/grpc handler, and asyncContext is the context for async job
 // handling. The asyncContext contains all values from requestContext, but it's
 // cancellation has nothing to do with the request, but is determined the timeout
-// set in pool constructor.
+// set in pool constructor. If the pool has reached max concurrency, the job will
+// be executed in the current goroutine. In other word, the job will be executed
+// synchronously.
 func (p *Pool) Go(requestContext context.Context, function func(asyncContext context.Context)) {
-	p.ch <- job{ctx: requestContext, function: function}
+	select {
+	case p.ch <- job{ctx: requestContext, function: function}:
+	default:
+		cancelCtx, cancel := context.WithTimeout(context.Background(), p.timeout)
+		defer cancel()
+		newCtx := asyncContext{valueCtx: requestContext, cancelCtx: cancelCtx}
+		function(newCtx)
+	}
 }
 
 // Run starts the async worker pool and block until it finishes.
