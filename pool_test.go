@@ -47,7 +47,7 @@ func TestPool_FallbackToSyncMode(t *testing.T) {
 	defer cancel()
 
 	dispatcher := events.SyncDispatcher{}
-	p := newPool(WithTimeout(time.Second), WithConcurrency(1), WithShutdownEvents())(&dispatcher)
+	p := NewPool(WithTimeout(time.Second), WithConcurrency(1), WithShutdownEvents())(&dispatcher)
 	p.Run(ctx)
 
 	var executed = make(chan struct{})
