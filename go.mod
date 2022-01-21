@@ -3,19 +3,22 @@ module github.com/DoNewsCode/core-pool
 go 1.17
 
 require (
-	github.com/DoNewsCode/core v0.10.4
+	github.com/DoNewsCode/core v0.12.0
 	github.com/gorilla/mux v1.8.0
 	github.com/oklog/run v1.1.0
 )
 
 require (
 	github.com/fsnotify/fsnotify v1.4.9 // indirect
+	github.com/go-kit/kit v0.12.0 // indirect
 	github.com/go-kit/log v0.2.0 // indirect
 	github.com/go-logfmt/logfmt v0.5.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
-	github.com/knadh/koanf v0.15.0 // indirect
+	github.com/knadh/koanf v1.4.0 // indirect
+	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
+	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/opentracing/opentracing-go v1.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/robfig/cron/v3 v3.0.1 // indirect
