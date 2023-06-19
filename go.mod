@@ -3,7 +3,7 @@ module github.com/DoNewsCode/core-pool
 go 1.17
 
 require (
-	github.com/DoNewsCode/core v0.12.2
+	github.com/DoNewsCode/core v0.12.3
 	github.com/gorilla/mux v1.8.0
 	github.com/oklog/run v1.1.0
 )
