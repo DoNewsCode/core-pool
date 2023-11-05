@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/DoNewsCode/core v0.12.2
-	github.com/gorilla/mux v1.8.0
+	github.com/gorilla/mux v1.8.1
 	github.com/oklog/run v1.1.0
 )
 
